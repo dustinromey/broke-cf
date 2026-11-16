@@ -1,4 +1,5 @@
 import { mkdirSync, writeFileSync } from "node:fs";
+import { after } from "next/server";
 import { join } from "node:path";
 import { today as todayDate } from "@/lib/data";
 import { fmtFor, fmtWith, ymd } from "@/lib/format";
@@ -46,6 +47,7 @@ export async function POST(request: Request) {
         })
         .finally(() => running.delete(user.id)),
     );
+    after(() => running.get(user.id)); // a Cloudflare Worker stops at the reply unless told the work isn't done
   }
   if (code) {
     await running.get(user.id);

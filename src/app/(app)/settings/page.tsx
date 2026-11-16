@@ -23,7 +23,7 @@ export default async function SettingsPage({ searchParams }: { searchParams: Pro
       local={local}
       folder={isHosted() ? "" : process.cwd()}
       update={await updateReady()}
-      repo={process.env.VERCEL_GIT_REPO_OWNER && process.env.VERCEL_GIT_REPO_SLUG ? `${process.env.VERCEL_GIT_REPO_OWNER}/${process.env.VERCEL_GIT_REPO_SLUG}` : null}
+      repo={process.env.BROKE_REPO || null}
       email={user?.email ?? ""}
       profile={user?.user_metadata?.profile ?? {}}
       aiMode={modeOf(user?.user_metadata)}

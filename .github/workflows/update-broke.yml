@@ -1,5 +1,5 @@
 # The "Update broke" button for a copy in your own GitHub: Actions, Update broke, Run workflow.
-# It pulls in the latest broke and keeps your changes. Vercel then rebuilds your site by itself.
+# It pulls in the latest broke and keeps your changes. Cloudflare then rebuilds your site by itself.
 name: Update broke
 on: workflow_dispatch
 permissions:

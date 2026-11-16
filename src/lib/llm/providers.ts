@@ -14,7 +14,7 @@ export const providers = aiProviders;
 export const localClient = () => new OpenAI({ apiKey: "local", baseURL: localBase() });
 
 // Hosted, the server has no CLIs or local models of its own: OpenRouter, or the AI apps on the person's computer through the helper.
-export const isHosted = () => process.env.BROKE_HOSTED === "1" || !!process.env.VERCEL;
+export const isHosted = () => process.env.BROKE_HOSTED === "1";
 
 /** What this user can pick: their OpenRouter connection, plus what this computer has, or when hosted what their helper offers. */
 export async function providersFor(userId: string, fresh = false): Promise<ProviderInfo[]> {
