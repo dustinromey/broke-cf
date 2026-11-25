@@ -26,12 +26,16 @@ On Windows: `git clone https://github.com/nextwork-projects/broke`, then `npm ru
 
 Use it from your phone, on a site only you own.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fnextwork-projects%2Fbroke&project-name=broke&repository-name=broke&env=NEXT_PUBLIC_SUPABASE_URL%2CNEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY%2CSUPABASE_SERVICE_ROLE_KEY%2CSUPABASE_DB_URL%2CPLAID_CLIENT_ID%2CPLAID_SECRET%2CPLAID_ENV&envDescription=Your+Supabase+project+and+Plaid+keys.+Only+your+copy+of+broke+sees+them.&envLink=https%3A%2F%2Fgithub.com%2Fnextwork-projects%2Fbroke%23put-it-online&envDefaults=%7B%22PLAID_ENV%22%3A%22sandbox%22%7D)
+It runs on [Cloudflare Workers](https://workers.cloudflare.com).
 
 1. Create a free [Supabase](https://supabase.com/dashboard/new) project and get [Plaid keys](https://dashboard.plaid.com/developers/keys).
-2. Press the button and paste them in. `SUPABASE_DB_URL` is under Supabase, Connect, Session pooler. broke creates its tables as it builds.
-3. Open your new site. It shows one step to do in Supabase before your first sign-in.
-4. Sign in once, then turn off "Allow new users to sign up" under Authentication, Sign In / Providers, so nobody else can use your copy.
+2. Copy broke to your own GitHub (Fork). In Cloudflare, open Workers & Pages, Create, Import a repository, and pick your copy.
+3. Set the build command to `npm run cf:build` and the deploy command to `npm run cf:deploy`.
+4. Add your keys in two places, because the build creates the tables and the site reads them as it runs: under Build, Variables and secrets, and under Settings, Variables and Secrets. The keys are `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_DB_URL`, `PLAID_CLIENT_ID`, `PLAID_SECRET` and `PLAID_ENV` (`sandbox` to start). `SUPABASE_DB_URL` is under Supabase, Connect, Session pooler.
+5. Open your new site. It shows one step to do in Supabase before your first sign-in.
+6. Sign in once, then turn off "Allow new users to sign up" under Authentication, Sign In / Providers, so nobody else can use your copy.
+
+Or from your computer: put the keys in `.env`, run `npm run cf:build`, then `npm run cf:deploy`, and add the same keys to the Worker with `npx wrangler secret bulk .env`.
 
 **AI on an online copy:** connect OpenRouter in one click. Or, to use your Claude or opencode plan, press **Connect my computer** on Connect your AI and run the command it gives you. Your AI login stays on your computer. AI answers while that command is running.
 
@@ -45,7 +49,7 @@ cd ~/broke && claude
 
 `CLAUDE.md` tells it the privacy rules. Run `npm run dev` to see changes as they happen. On an online copy, `git push` publishes them.
 
-**Get the latest broke:** it updates itself each time you start it (`broke`, or the install command), as long as you haven't changed its code. With your own changes, run `npm run update`. To turn auto-update off, start it with `BROKE_NO_AUTO_UPDATE=1`. On an online copy there's nothing to install: in your GitHub repo open Actions, Update broke, Run workflow, and Vercel rebuilds your site. Your changes stay either way.
+**Get the latest broke:** it updates itself each time you start it (`broke`, or the install command), as long as you haven't changed its code. With your own changes, run `npm run update`. To turn auto-update off, start it with `BROKE_NO_AUTO_UPDATE=1`. On an online copy there's nothing to install: in your GitHub repo open Actions, Update broke, Run workflow, and Cloudflare rebuilds your site. Your changes stay either way.
 
 If you make something others would want, send a pull request.
 

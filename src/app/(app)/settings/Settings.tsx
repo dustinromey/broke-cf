@@ -624,7 +624,7 @@ function ImproveCard({ folder, repo }: { folder: string; repo: string | null }) 
         <ol className="space-y-3 text-sm list-decimal pl-5">
           <li className="space-y-1.5">Copy your code to your computer and start your AI app.<code className={line}>git clone {github ?? "<your repo>"} broke &amp;&amp; cd broke &amp;&amp; claude</code></li>
           <li>Say what you want, like &quot;add a chart of my spending by weekday&quot;.</li>
-          <li className="space-y-1.5">Publish it. Vercel rebuilds your site.<code className={line}>git add -A &amp;&amp; git commit -m &quot;My change&quot; &amp;&amp; git push</code></li>
+          <li className="space-y-1.5">Publish it. Cloudflare rebuilds your site.<code className={line}>git add -A &amp;&amp; git commit -m &quot;My change&quot; &amp;&amp; git push</code></li>
         </ol>
       </Card>
     </>

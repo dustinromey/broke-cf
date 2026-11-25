@@ -6,6 +6,9 @@
     "dev": "next dev --turbopack -H 127.0.0.1",
     "build": "next build",
     "start": "next start",
+    "cf:build": "node --env-file-if-exists=.env --env-file-if-exists=.env.local scripts/migrate.mjs && opennextjs-cloudflare build",
+    "cf:deploy": "opennextjs-cloudflare deploy",
+    "cf:preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "app": "node scripts/start.mjs",
     "lint": "eslint",
     "migrate": "node --env-file=.env --env-file-if-exists=.env.local scripts/migrate.mjs",
@@ -20,7 +23,7 @@
     "@supabase/supabase-js": "^2.118.0",
     "gsap": "^3.15.0",
     "lucide-react": "^0.577.0",
-    "next": "15.5.4",
+    "next": "15.5.29",
     "openai": "^6.49.0",
     "pdfjs-dist": "5.4.149",
     "pg": "^8.23.1",
@@ -33,16 +36,18 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@opennextjs/cloudflare": "^1.20.17",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/pg": "^8.23.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.5.4",
+    "eslint-config-next": "15.5.29",
     "puppeteer-core": "^24.43.1",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.163.0"
   },
   "engines": {
     "node": ">=22.18"

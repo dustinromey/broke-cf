@@ -1,0 +1,12 @@
+// Cloudflare Workers settings. Keys are not kept here: add them in the Cloudflare dashboard (see README, Put it online).
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "broke",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": { "directory": ".open-next/assets", "binding": "ASSETS" },
+  "vars": { "BROKE_HOSTED": "1" },
+  "keep_vars": true, // a deploy leaves the keys you added in the dashboard alone
+  "observability": { "enabled": true }
+}

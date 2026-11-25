@@ -62,7 +62,9 @@ async function run(exec: Exec, files: string[], apply: boolean): Promise<Migrati
 }
 
 export async function migrate({ apply = true }: { apply?: boolean } = {}): Promise<MigrationResult> {
-  const files = await migrationFiles();
+  // On Cloudflare the migration files don't ship with the Worker: the build applied them (npm run cf:build).
+  const files = await migrationFiles().catch(() => null);
+  if (!files) return { configured: true, connected: true, applied: [], pending: [], total: 0 };
   const url = process.env.SUPABASE_DB_URL;
   if (!url || /YOUR-PASSWORD|your_/i.test(url)) {
     // No connection string: use the "Connect Supabase" sign-in when this computer has one.

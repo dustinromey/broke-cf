@@ -140,7 +140,7 @@ export async function setupStatus(signedIn: boolean): Promise<SetupStatus> {
     if (!r.connected) database = { ...database, status: "error", note: r.error };
     else if (r.pending.length)
       database = { ...database, steps: undefined, fields: undefined, note: `${r.pending.length} update${r.pending.length === 1 ? "" : "s"} waiting. This only adds tables; your data stays as it is.`, action: "migrate" };
-    else database = { ...database, status: "done", steps: undefined, fields: undefined, action: undefined, note: `Up to date · ${r.total} updates` };
+    else database = { ...database, status: "done", steps: undefined, fields: undefined, action: undefined, note: r.total ? `Up to date · ${r.total} updates` : "Up to date" };
   }
 
   const plaidSection: Section = {
@@ -282,7 +282,7 @@ export async function setupStatus(signedIn: boolean): Promise<SetupStatus> {
 const LOOPBACK = /^(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$/;
 
 function writeAllowedBasics(): { ok: boolean; reason?: string } {
-  if (process.env.NODE_ENV === "production" && process.env.ALLOW_SETUP_WRITES !== "1") return { ok: false, reason: "Keys for this site are set where it's hosted, such as your Vercel project's environment variables." };
+  if (process.env.NODE_ENV === "production" && process.env.ALLOW_SETUP_WRITES !== "1") return { ok: false, reason: "Keys for this site are set where it's hosted, such as your Cloudflare Worker's variables and secrets." };
   return { ok: true };
 }
 

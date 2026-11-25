@@ -14,11 +14,11 @@ export default async function Setup({ searchParams }: { searchParams: Promise<{ 
   if (isHosted() && !supabaseReady()) return (
     <main className="min-h-screen grid place-items-center px-4 bg-canvas">
       <section className="card p-8 max-w-lg space-y-3">
-        <h1 className="text-2xl font-semibold">Add your keys in Vercel</h1>
+        <h1 className="text-2xl font-semibold">Add your keys in Cloudflare</h1>
         <ol className="space-y-2 text-sm list-decimal pl-5">
-          <li>Open this project in <a className="underline underline-offset-2" href="https://vercel.com/dashboard">Vercel</a>, then Settings, Environment Variables.</li>
+          <li>Open this Worker in <a className="underline underline-offset-2" href="https://dash.cloudflare.com/?to=/:account/workers-and-pages">Cloudflare</a>, then Settings. The keys go in twice: under Variables and Secrets, and under Build, Variables and secrets.</li>
           <li>Add <code>NEXT_PUBLIC_SUPABASE_URL</code>, <code>NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY</code>, <code>SUPABASE_SERVICE_ROLE_KEY</code> and <code>SUPABASE_DB_URL</code> from your Supabase project.</li>
-          <li>Open Deployments and press Redeploy.</li>
+          <li>Open Deployments and retry the latest build.</li>
         </ol>
       </section>
     </main>
